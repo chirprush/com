@@ -5,7 +5,7 @@ from pathlib import Path
 import shutil as sh
 import subprocess as sub
 
-from com_template import template_paths, compile_commands, run_commands
+from com_template import template_paths, template_languages, compile_commands, run_commands
 from com_env import verify_project, extract_language, extract_tests
 
 def do_test(args):
@@ -78,8 +78,13 @@ def do_check(args):
         print()
 
         if p.returncode != 0:
-            print("Compilation failed:")
-            print(p.stderr)
+            print("Compilation failed.")
+            if p.stderr:
+                print("\nCaptured output from stderr:")
+                print(p.stderr)
+            if p.stdout:
+                print("\nCaptured output from stdout:")
+                print(p.stdout)
             return -1
         else:
             print("All is A Okay")
@@ -125,11 +130,11 @@ def do_create(args):
     bin_ = project.joinpath(Path("bin"))
     bin_.mkdir()
 
-    if args.template not in template_paths:
+    if args.template not in template_languages:
         print(f"Could not find template \"{args.template}\". Make sure it's included in the com template paths")
         return -1
 
-    main_name = f"main.{args.template}"
+    main_name = f"main.{template_languages[args.template]}"
     sh.copy(template_paths[args.template], project.joinpath(Path(main_name)))
 
     return 0
@@ -151,7 +156,7 @@ run_parser.set_defaults(func=do_run)
 
 create_parser = command_parser.add_parser("create")
 create_parser.add_argument("name")
-create_parser.add_argument("-t", "--template", default="cpp")
+create_parser.add_argument("-t", "--template", default="cf")
 create_parser.set_defaults(func=do_create)
 
 namespace = parser.parse_args(argv[1:])
