@@ -1,16 +1,20 @@
 supported_languages = ["cpp", "py"]
 
 template_languages = {
-    "usaco" : "cpp",
     "cf"    : "cpp",
+    "usaco" : "cpp",
+    "usacotrain"  : "cpp",
     "cfpy"  : "py",
+    "python"  : "py",
     "usacopy"  : "py",
 }
 
 template_paths = {
     "cf" : "/home/rushil/Coding/olympiad/templates/template_cf.cpp",
     "usaco" : "/home/rushil/Coding/olympiad/templates/template_usaco.cpp",
+    "usacotrain" : "/home/rushil/Coding/olympiad/templates/template_usacotraining.cpp",
     "cfpy" : "/home/rushil/Coding/olympiad/templates/template.py",
+    "python" : "/home/rushil/Coding/olympiad/templates/template_blank.py",
     "usacopy" : "/home/rushil/Coding/olympiad/templates/template.py",
 }
 

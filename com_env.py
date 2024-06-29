@@ -32,4 +32,4 @@ def extract_tests():
 
         found_tests.append(Test(p.absolute(), p.with_suffix(".out").absolute()))
 
-    return found_tests
+    return sorted(found_tests, key=lambda t: t.input)

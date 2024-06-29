@@ -23,7 +23,7 @@ def do_test(args):
             with open(test.input, "r") as f:
                 p = sub.run(run_command, stdin=f, capture_output=True, text=True)
             if p.returncode != 0:
-                print("Failed at test {i} (error while running)")
+                print("Failed at test {test.input.name}  (error while running)")
                 print("Captured output from stderr:")
                 print(p.stderr)
                 return -1
@@ -46,7 +46,7 @@ def do_test(args):
                     break
 
             if failed:
-                print(f"Failed test {j + 1} (input mismatch)")
+                print(f"Failed test {test.input.name} (input mismatch)")
                 print(f"Expected output:")
                 print("\n".join(answer_lines))
 
@@ -54,7 +54,7 @@ def do_test(args):
                 print("\n".join(output_lines))
                 print()
             else:
-                print(f"Passed test {j + 1}")
+                print(f"Passed test {test.input.name}")
                 passed += 1
 
         print()
